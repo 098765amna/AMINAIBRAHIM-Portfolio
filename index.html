@@ -1,0 +1,513 @@
+l<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: rgb(174, 159, 244);
+        }
+
+        header {
+            background: #222;
+            color: white;
+            padding: 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+        }
+
+        .logo {
+            color: #f7c6ff;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+        }
+
+        .nav-links li a:hover {
+            color: #f7c6ff;
+            transition: 0.3s;
+        }
+
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgb(11, 11, 11);
+            color: #fff;
+            padding: 0 100px;
+            height: 100vh;
+        }
+
+        .hero-left h2 {
+            font-size: 20px;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .hero-left h3 {
+            font-size: 35px;
+            margin-bottom: 8px;
+        }
+
+        .hero-left h3 span {
+            color: red;
+            font-weight: bold;
+        }
+
+        .hero-left p {
+            font-size: 18px;
+            color: #eaeaea;
+        }
+
+        .hero-left h4 {
+            font-size: 16px;
+            color: #f7c6ff;
+            margin-top: 10px;
+        }
+
+        .hero-right img {
+            width: 380px;
+            height: 450px;
+            object-fit: cover;
+        }
+
+        .about {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px 100px;
+            background: rgb(174, 159, 244);
+        }
+
+        .about-left img {
+            width: 300px;
+            height: 350px;
+            object-fit: cover;
+        }
+
+        .about-right {
+            max-width: 500px;
+        }
+
+        .about-right h2 {
+            font-size: 35px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .about-right p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .skills-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            padding: 60px 100px;
+            background: rgb(174, 159, 244);
+            gap: 10px;
+            position: relative;
+        }
+
+        .skills-container::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #0c0c0c;
+            transform: translateX(-50%);
+        }
+
+        .coding-skills {
+            border: 2px solid #0c0c0c;
+            border-radius: 10px;
+            padding: 20px;
+            width: 350px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .coding-skills h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .skill {
+            margin-bottom: 15px;
+        }
+
+        .skill-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background-color: #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 20px;
+            background-color: #0c0c0c;
+            text-align: right;
+            padding-right: 5px;
+            color: white;
+            line-height: 20px;
+            border-radius: 5px 0 0 5px;
+        }
+        .contact-container {
+            border: 2px solid #242424;
+            text-align: center;
+            border-radius: 10px;
+            padding: 20px;
+            width: 80%;
+            max-width: 600px;
+            background-color: rgb(174, 159, 244);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin: 60px auto;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .top-row {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+        }
+
+        .contact-box {
+            border: 2px solid #6a54d920;
+            border-radius: 10px;
+            padding: 12px;
+            width: 90%;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .contact-box h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .contact-box input {
+            width: 100%;
+            padding: 4px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            height: 40px;
+        }
+
+        .contact-box textarea {
+            width: 100%;
+            padding: 4px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: vertical;
+            min-height: 20px;
+        }
+
+        .submit-btn {
+            background-color: #0c0d0c60;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .submit-btn:hover {
+            background-color: #0c0c0c;
+        }
+
+        .experience {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 80px 150px;
+            background: rgb(174, 159, 244);
+            position: relative;
+        }
+
+        .experience::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #0c0c0c;
+            transform: translateX(-50%);
+        }
+
+        .experience-left {
+            max-width: 520px;
+            display: flex;
+            flex-direction: column;
+            gap: 100px;
+        }
+
+        .experience-right {
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 100px;
+            margin-top: 100px;
+        }
+
+        .experience-container {
+            border: 2px solid #0c0c0c;
+            border-radius: 10px;
+            padding: 10px;
+            width: 70%;
+            max-width: 350px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            margin: 0 30px;
+        }
+
+        .education-container {
+            border: 2px solid #0c0c0c;
+            border-radius: 10px;
+            padding: 10px;
+            width: 70%;
+            max-width: 300px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            margin: 60px auto;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <h1 class="logo">AMINA IBRAHIM - Portfolio</h1>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="hero" id="home">
+        <div class="hero-left">
+            <h2>FRONT END DEVELOPER</h2>
+            <h3>Hi, I am <span>Amina Ibrahim</span></h3>
+            <p>Web App Developer  UI/UX</p>
+        </div>
+        <div class="hero-right">
+            <img src="amina.jpg" alt="profile">
+        </div>
+    </div>
+
+    <!-- ABOUT SECTION -->
+    <div class="about" id="about">
+        <div class="about-left">
+            <img src="amina.jpg" alt="about image">
+        </div>
+        <div class="about-right">
+            <h2>About Me</h2>
+            <p>
+                My name is <b>Amina Ibrahim</b>. I am a passionate and creative Front end Web Developer and UI/UX Designer.
+                I design modern, clean and user-friendly websites that not only look beautiful but also provide
+                a smooth and meaningful user experience. My aim is to turn ideas into visually appealing
+                and fully functional websites.
+                <br><br>
+                I love learning and improving my skills every day. I enjoy working on creative projects,
+                designing layouts, choosing color combinations and making designs that reflect brand identity.
+                I believe that every design should be simple, elegant and user-focused.
+            </p>
+        </div>
+    </div>
+
+    <h2 style="text-align: center;">Experience</h2>
+
+    <div class="experience" id="experience">
+        <div class="experience-left">
+            <div class="experience-container top-container">
+                <h2>Frontend Developer</h2>
+                <p>Developed and maintained web applications using React, Vue.js, and modern CSS frameworks.</p>
+            </div>
+            <div class="experience-container bottom-container">
+                <h2>Web Developer</h2>
+                <p>Built responsive websites and optimized performance for better user experience.</p>
+            </div>
+        </div>
+        <div class="experience-right">
+            <div class="experience-container top-container">
+                <h2>Senior Frontend Developer</h2>
+                <p>Led development teams and implemented advanced UI/UX solutions with cutting-edge technologies.</p>
+            </div>
+            <div class="experience-container bottom-container">
+                <h2>Junior Web Developer</h2>
+                <p>Assisted in coding, debugging, and learning modern web development practices.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="education-container">
+        <h2 style="text-align: center;">Education</h2>
+        <p style="text-align: center; font-size: 18px; color: #333;">Matric from KRL Model School</p>
+        <p style="text-align: center; font-size: 18px; color: #333;">FSC from IRUM Model College</p>
+        <p style="text-align: center; font-size: 18px; color: #333;">Bachelor's in Computer Science (KICSIT University)</p>
+    </div>
+
+    <h2 style="text-align: center;">Skills</h2>
+
+    <!-- SKILLS SECTION (Dono Boxes Saath) -->
+    <div class="skills-container" id="skills">
+        <!-- Coding Skills Box -->
+        <div class="coding-skills">
+            <h2>Coding Skills</h2>
+            <div class="skill">
+                <div class="skill-name">HTML</div>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 90%;">90%</div>
+                </div>
+            </div>
+            <div class="skill">
+                <div class="skill-name">CSS</div>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 90%;">90%</div>
+                </div>
+            </div>
+            <div class="skill">
+                <div class="skill-name">JavaScript</div>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 70%;">85%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- More Skills Box -->
+        <div class="coding-skills">
+            <h2>More Skills</h2>
+            <div class="skill">
+                <div class="skill-name">GitHub</div>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 85%;">85%</div>
+                </div>
+            </div>
+            <div class="skill">
+                <div class="skill-name">Web Designing</div>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 90%;">90%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 style="text-align: center; background-color: rgb(174, 159, 244); color: white; padding: 20px;">Contact Me</h2>
+    <div class="contact-section" id="contact" style="display: flex; justify-content: space-between; align-items: flex-start; padding: 60px 100px;">
+        <div class="contact-info" style="flex: 1; margin-right: 20px;">
+            <h3 style="text-align: left; margin-top: 0; background-color: rgb(174, 159, 244); color: white; padding: 10px;"><i class="fas fa-map-marker-alt"></i> Location<br>Rawalpindi, Pakistan</h3>
+            <h3 style="text-align: left; margin-top: 20px; background-color: rgb(174, 159, 244); color: white; padding: 10px;"><i class="fas fa-envelope"></i> Email<br>amnaibrahim098@gmail.com</h3>
+            <h3 style="text-align: left; margin-top: 20px; background-color: rgb(174, 159, 244); color: white; padding: 10px;"><i class="fas fa-phone"></i> Phone<br>+92 322 9865236<br>+92 329 5747578</h3>
+        </div>
+        <div class="contact-container" style="flex: 1; margin: 0;">
+            <div class="contact-form">
+                <div class="contact-box">
+                    <input type="text" id="fullName" placeholder="Full Name">
+                </div>
+                <div class="contact-box">
+                    <input type="email" id="email" placeholder="Email">
+                </div>
+                <div class="contact-box">
+                    <textarea id="message" placeholder="Message"></textarea>
+                </div>
+                <button class="submit-btn" onclick="handleSubmit(event)">Send Message</button>
+            </div>
+        </div>
+    </div>
+    <footer style="background-color: #000; color: white; text-align: center; padding: 20px; margin-top: 60px;">
+        <div style="margin-bottom: 10px;">
+            <a href="https://github.com/098765amna" target="_blank" style="color: white; margin: 0 10px; font-size: 24px;"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/amina-ibrahim-835675386?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" style="color: white; margin: 0 10px; font-size: 24px;"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <p>&copy; 2025 Amina Ibrahim. All rights reserved.</p>
+    </footer>
+    <script>
+        (function(){
+            emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
+        })();
+
+        function handleSubmit(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            // Basic validation
+            if (!fullName || !email || !message) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            // Send email using EmailJS
+            emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+                from_name: fullName,
+                from_email: email,
+                message: message,
+            })
+            .then(function(response) {
+                alert('Thank you, ' + fullName + '! Your message has been sent.');
+                // Change button color to green
+                document.querySelector('.submit-btn').style.backgroundColor = '#008000';
+                // Clear the form
+                document.querySelector('.contact-form').reset();
+            }, function(error) {
+                alert('Failed to send message. Please try again.');
+                console.error('EmailJS error:', error);
+            });
+        }
+    </script>
+
+
+</html>
